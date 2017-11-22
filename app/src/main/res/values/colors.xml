@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#A7C9DA</color>
+    <color name="colorPrimaryDark">#84AFC5</color>
+    <color name="colorAccent">#B8E8D7</color>
+    
+    <color name="colorPrimaryLight">#BBDEFB</color>
+    <color name="colorSecondary">#BDBDBD</color>
+
+    <color name="tapLayoutBackground">#B2D4E6</color>
+
+    <color name="activatedBar">#b8e8ff</color>
+
+    <color name="applyList0">#B2D4E6</color>
+    <color name="applyList1">#A7C9DA</color>
+    <color name="applyList2">#89B9D1</color>
+    <color name="applyList3">#75B1D0</color>
+    <color name="applyList4">#63A0BF</color>
+
+    <color name="dormitoryListBackground">#DBEAF2</color>
+    
+    <color name="unapplied">#CBCBCB</color>
+    <color name="unapplied_stroke">#FFEE1A</color>
+    <color name="applied">#B8E8D7</color>
+
+    <color name="extensionBackground">#F4FAFD</color>
+
+    <color name="extension1">#63A0BF</color>
+    <color name="extension2">#FF6B6B</color>
+    <color name="extension3">#FFED6B</color>
+    <color name="extension4">#6CE23B</color>
+
+    <color name="myPageBackground">#EEEEEE</color>
+    <color name="myPageScoreBackground">#EBF4F9</color>
+
+    <color name="valid">#4CAF50</color>
+    <color name="invalid">#D32F2F</color>
+    
+    <color name="disabled">#61000000</color>
+
+    <color name="positive">#66BB6A</color>
+    <color name="negative">#EF5350</color>
+
+<!--
+    공지사항 색
+-->
+    <color name="black">#000000</color>
+    <color name="tap_layout">#EEEEEE</color> <!--가정통신문 리스트 엑티비티에서 사용-->
+    <color name="question_list">#1565C0</color> <!--메인 엑티비티에서 사용-->
+    <color name="white">#FAFAFA</color>
+    <color name="thin">#BBDEFB</color> <!--연한색깔-->
+    <color name="middle">#90CAF9</color> <!--중간색깔 버튼에 주로 사용-->
+    <color name="dark">#448AFF</color> <!--진한색깔-->
+</resources>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/survey_layout_extension_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <include layout="@layout/dialog_toolbar" />
+        </android.support.design.widget.AppBarLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.06"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/survey_name_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="3dp"
+                    android:text="기간 : 2017-10-11~2017-11-11"
+                    android:textColor="@color/dark"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.94">
+            <View
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:background="@color/colorPrimary"
+                android:layout_width="8dp"
+                android:layout_height="48dp">
+
+            </View>
+
+
+            <ImageButton
+                android:id="@+id/survey_back_button_after"
+                android:src="@drawable/ic_chevron_left_white_24dp"
+                android:background="@color/colorPrimaryDark"
+                android:layout_width="30dp"
+                android:layout_height="80dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="4dp" />
+
+
+            <ImageButton
+                android:id="@+id/survey_next_button_after"
+                android:src="@drawable/ic_chevron_right_white_24dp"
+                android:background="@color/colorPrimaryDark"
+                android:layout_width="30dp"
+                android:layout_height="80dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="4dp" />
+
+            <com.dms.beinone.application.views.custom.UnscrollableViewPager
+                android:id="@+id/survey_question_view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_weight="1">
+
+
+            </com.dms.beinone.application.views.custom.UnscrollableViewPager>
+
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/survey_current_view_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="right"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="1dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/fish"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+        />
+
+        <ImageView
+            android:layout_marginLeft="8dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="2dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/fish"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            />
+
+        <ImageView
+            android:layout_gravity="bottom"
+            android:layout_marginRight="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="4dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/fish"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <com.dms.beinone.application.views.custom.UnscrollableViewPager
+        android:id="@+id/viewpager_meal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingLeft="48dp"
+        android:paddingStart="48dp"
+        android:paddingTop="64dp"
+        android:paddingBottom="64dp"
+        android:paddingRight="48dp"
+        android:paddingEnd="48dp" />
+
+    <ImageButton
+        android:id="@+id/ib_meal_prev"
+        android:layout_width="72dp"
+        android:layout_height="32dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="80dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginBottom="46dp"
+        android:background="@drawable/button"
+        android:elevation="4dp"
+        android:src="@drawable/ic_chevron_left_white_24dp" />
+
+    <ImageButton
+        android:id="@+id/ib_meal_next"
+        android:layout_width="72dp"
+        android:layout_height="32dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="46dp"
+        android:layout_marginEnd="80dp"
+
+        android:layout_marginRight="80dp"
+        android:background="@drawable/button"
+        android:elevation="4dp"
+        android:src="@drawable/ic_chevron_right_white_24dp" />
+</RelativeLayout>
