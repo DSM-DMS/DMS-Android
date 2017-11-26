@@ -259,8 +259,6 @@ public class MyPageFragment extends Fragment {
                         case HTTP_OK:
                             Log.d("MYPAGE_DATA",response.body().toString());
                             Account account=response.body();
-
-
                             bind(account);
                             break;
                         case HTTP_NO_CONTENT:
