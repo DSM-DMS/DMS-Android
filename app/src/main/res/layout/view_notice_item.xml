@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardElevation="8dp"
+    app:cardCornerRadius="24dp"
+    android:background="#fff"
+    app:cardMaxElevation="24dp"
+    android:layout_marginLeft="12dp"
+    android:layout_marginRight="12dp"
     android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    android:layout_marginTop="8dp"
-    >
+    android:layout_height="74dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:layout_marginTop="6dp"
-        android:id="@+id/dormitory_notice_item_title"
-        android:text="제목"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:layout_marginLeft="16dp"
-        android:textColor="@color/applyList3"
-        android:maxLines="1"
-        android:ellipsize="end"
-        />
+        <TextView
+            android:id="@+id/dormitory_notice_item_title"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/linearLayout"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/linearLayout"
+            android:layout_marginTop="12dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="제목"
+            android:textColor="@color/applyList3"
+            android:textSize="18dp"
+            android:textStyle="bold" />
 
     <LinearLayout
         android:layout_below="@id/dormitory_notice_item_title"
@@ -27,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
-        >
+        android:id="@+id/linearLayout">
 
         <TextView
             android:id="@+id/normal_text"
@@ -71,12 +85,7 @@
         android:layout_marginRight="12dp"
         />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/black"
-        android:layout_alignParentBottom="true"
-        >
-    </View>
 
-</RelativeLayout>
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

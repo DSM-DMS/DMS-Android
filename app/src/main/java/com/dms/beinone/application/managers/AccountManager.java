@@ -18,7 +18,6 @@ public class AccountManager {
     private static String LOGIN_KEY="Logined";
     private static String TOKEN_KEY="Token";
 
-
     public static void setLogined(Context context, boolean mLogined) {
         SharedPreferences sharedPreferences=context.getSharedPreferences(NAME,Context.MODE_PRIVATE);
         sharedPreferences.edit().putBoolean(LOGIN_KEY,mLogined).apply();

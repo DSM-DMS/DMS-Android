@@ -17,6 +17,7 @@
         android:paddingStart="16dp"
         android:paddingTop="8dp"
         android:paddingRight="16dp"
+        android:textStyle="bold"
         android:paddingEnd="16dp"
         android:paddingBottom="8dp"
         android:textSize="22sp"

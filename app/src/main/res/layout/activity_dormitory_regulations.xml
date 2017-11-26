@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,14 +7,18 @@
     android:orientation="vertical"
     tools:context="com.dms.beinone.application.activities.DormitoryNoticeActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/layout_extension_appbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
 
-        <include layout="@layout/apply_list_toolbar" />
-    </android.support.design.widget.AppBarLayout>
+    <ImageButton
+        android:id="@+id/ib_toolbar_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_chevron_left_black_24dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,6 +26,7 @@
         android:orientation="vertical">
 
         <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="32dp"
             android:id="@+id/dormitory_faq_recycler"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -61,11 +66,11 @@
                 android:layout_marginTop="6dp"
                 android:layout_marginBottom="6dp"
                 android:text="자주하는 질문"
-                android:textColor="@color/black"
+                android:textColor="#303F9F"
                 android:gravity="center_horizontal|center_vertical"
                 android:textSize="20sp"
                 />
         </RelativeLayout>
 
     </LinearLayout>
-</LinearLayout>
+</FrameLayout>

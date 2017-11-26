@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,12 +26,21 @@ import com.dms.beinone.application.managers.HttpManager;
 import com.dms.beinone.application.models.ApplyStatus;
 import com.dms.beinone.application.models.Class;
 import com.dms.beinone.application.models.Goingout;
+import com.dms.beinone.application.models.Notice;
 import com.dms.beinone.application.utils.ExtensionUtils;
 import com.dms.beinone.application.utils.StayUtils;
 import com.dms.beinone.application.views.custom.ExpandableLayout;
 import com.dms.boxfox.networking.HttpBox;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -95,9 +105,11 @@ public class ApplyListFragment extends Fragment {
                 }));
 
         try {
+            loadApplyStay();
+            loadApplyExtension_11();
 
-            loadApplyStay(AccountManager.isToken(getActivity()));
-            loadApplyGoingout(AccountManager.isToken(getActivity()));
+//            loadApplyExtension_11(AccountManager.isToken(getActivity()));
+            loadApplyGoingout();
             //loadApplyStatus();
         } catch (IOException e) {
             System.out.println("IOException in ApplyListFragment: GET /apply/all");
@@ -173,12 +185,18 @@ public class ApplyListFragment extends Fragment {
     private void setStayApplyStatus(int value) {
         View view = mExpandableLayout.getChildAt(3);
         TextView statusTV = (TextView) view.findViewById(R.id.tv_apply_list_child_status);
-
-        if (value == -1) {
-            statusTV.setText(R.string.unapplied);
-        } else {
-            statusTV.setText(StayUtils.getStringFromStayStatus(value));
+        if(AccountManager.isLogined(getActivity())==true){
+            if (value == -1) {
+                statusTV.setText(R.string.unapplied);
+            } else {
+                statusTV.setText(StayUtils.getStringFromStayStatus(value));
+            }
+        }else{
+            statusTV.setText("로그인을 해주세요");
         }
+
+
+
     }
 
     private void setGoingoutApplyStatus(Goingout goingout) {
@@ -195,48 +213,61 @@ public class ApplyListFragment extends Fragment {
         }
     }
 
-    private void loadApplyStay(String token) throws IOException{
-        DMSService dmsService = HttpManager.createDMSService(getContext());
-        Call<ApplyStatus> call=dmsService.applyStayStatus(AccountManager.isToken(getActivity()));
-        call.enqueue(new Callback<ApplyStatus>() {
-            @Override
-            public void onResponse(Call<ApplyStatus> call, Response<ApplyStatus> response) {
+    private void loadApplyStay() throws IOException {
 
-                switch (response.code()){
+
+        Log.d("loadApplayStay","함수호출");
+        DMSService dmsService = HttpManager.createDMSService(getContext());
+        Call<JsonObject> call = dmsService.applyStayStatus(AccountManager.isToken(getActivity()));
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                Log.d("loadApplyStay_CODE",String.valueOf(response.code()));
+                switch (response.code()) {
                     case HTTP_OK:
-                        ApplyStatus applyStatus = response.body();
-                        if (applyStatus.isStayApplied()) {
-                            setStayApplyStatus(applyStatus.getStayValue());
-                        }
+                        Toast.makeText(getActivity(), response.body().toString(), Toast.LENGTH_LONG).show();
+                        Gson gson=new Gson();
+                        Log.d("stay_value_json",response.body().toString());
+
+                        JsonParser parser = new JsonParser();
+                        JsonElement element = parser.parse(response.body().toString());
+                        int stayValue = element.getAsJsonObject().get("value").getAsInt();
+                        setStayApplyStatus(stayValue);
                         break;
                     case HTTP_NO_CONTENT:
                         break;
                 }
-
-
             }
-
             @Override
-            public void onFailure(Call<ApplyStatus> call, Throwable t) {
+            public void onFailure(Call<JsonObject> call, Throwable t) {
                 t.getMessage();
             }
         });
+
+
     }
 
-    private void loadApplyGoingout(String token) throws IOException{
+
+
+    private void loadApplyGoingout() throws IOException{
         DMSService dmsService = HttpManager.createDMSService(getContext());
-        Call<ApplyStatus> call=dmsService.applyGoingoutStatus(AccountManager.isToken(getActivity()));
-        call.enqueue(new Callback<ApplyStatus>() {
+        Call<JsonArray> call=dmsService.applyGoingoutStatus(AccountManager.isToken(getActivity()));
+        call.enqueue(new Callback<JsonArray>() {
             @Override
-            public void onResponse(Call<ApplyStatus> call, Response<ApplyStatus> response) {
+            public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
                 switch (response.code()){
                     case HTTP_OK:
-                        ApplyStatus applyStatus=response.body();
-                        if (applyStatus.isGoingoutApplied()) {
+                        //ApplyStatus applyStatus=response.body();
+                        Gson gson=new Gson();
+
+                        Type type = new TypeToken<Integer>() {}.getType();
+                        ApplyStatus applyStatus=gson.fromJson(response.body().toString(),type);
+                       /* if (applyStatus.isGoingoutApplied()) {
                             boolean sat = applyStatus.isGoingoutSat();
                             boolean sun = applyStatus.isGoingoutSun();
                             setGoingoutApplyStatus(new Goingout(sat, sun));
-                        }
+                        }*/
                         break;
                     case HTTP_NO_CONTENT:
                         break;
@@ -244,26 +275,36 @@ public class ApplyListFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ApplyStatus> call, Throwable t) {
+            public void onFailure(Call<JsonArray> call, Throwable t) {
 
             }
         });
     }
 
-    private void loadApplyExtension_11(String token) throws IOException{
-        DMSService dmsService = HttpManager.createDMSService(getContext());
-        Call<ApplyStatus> call=dmsService.applyExtensionStatus_11(AccountManager.isToken(getActivity()));
-        call.enqueue(new Callback<ApplyStatus>() {
+    private void loadApplyExtension_11() throws IOException{
+        DMSService dmsService = HttpManager.createDMSService_STUDENT(getContext());
+        Call<JsonObject> call=dmsService.applyExtensionStatus_11(AccountManager.isToken(getActivity()));
+        call.enqueue(new Callback<JsonObject>() {
             @Override
-            public void onResponse(Call<ApplyStatus> call, Response<ApplyStatus> response) {
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                Log.d("GET_Extension",String.valueOf(response.code()));
                 switch (response.code()){
                     case HTTP_OK:
-                        ApplyStatus applyStatus = response.body();
-                        if (applyStatus.isExtensionApplied()) {
+                        Log.d("GET_Extension",response.body().toString());
+
+                        JsonParser parser = new JsonParser();
+                        JsonElement element = parser.parse(response.body().toString());
+
+                        int clazz=element.getAsJsonObject().get("class").getAsInt();
+                        int seat=element.getAsJsonObject().get("seat").getAsInt();
+
+                        setExtensionApplyStatus(new Class(clazz,"name"));
+                      /*  if (applyStatus.isExtensionApplied()) {
                             int no = applyStatus.getExtensionClass();
                             String name = applyStatus.getExtensionName();
                             setExtensionApplyStatus(new Class(no, name));
-                        }
+                        }*/
                         break;
                     case HTTP_NO_CONTENT:
                         break;
@@ -271,7 +312,7 @@ public class ApplyListFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ApplyStatus> call, Throwable t) {
+            public void onFailure(Call<JsonObject> call, Throwable t) {
 
             }
         });
@@ -323,6 +364,7 @@ public class ApplyListFragment extends Fragment {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 int code = response.code();
+                Log.d("Going out",String.valueOf(response.code()));
                 switch (code) {
                     case HTTP_OK:
                         Toast.makeText(getContext(), R.string.apply_ok, Toast.LENGTH_SHORT).show();
