@@ -33,6 +33,7 @@ import retrofit2.Response;
 import static com.dms.beinone.application.DMSService.HTTP_BAD_REQUEST;
 import static com.dms.beinone.application.DMSService.HTTP_CREATED;
 import static com.dms.beinone.application.DMSService.HTTP_INTERNAL_SERVER_ERROR;
+import static com.dms.beinone.application.DMSService.HTTP_NO_CONTENT;
 
 /**
  * Created by BeINone on 2017-01-25.
@@ -132,7 +133,7 @@ public class LoginActivity extends AppCompatActivity {
                         AccountManager.setToken(LoginActivity.this,access_token);
                         finish();
                         break;
-                    case HTTP_BAD_REQUEST:
+                    case HTTP_NO_CONTENT:
                         Toast.makeText(LoginActivity.this, R.string.login_bad_request, Toast.LENGTH_SHORT).show();
                         break;
                     case HTTP_INTERNAL_SERVER_ERROR:
