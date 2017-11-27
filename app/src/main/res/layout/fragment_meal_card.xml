@@ -27,7 +27,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="4dp"
                     android:layout_marginRight="4dp"
-                    android:textSize="34sp" />
+                    android:textSize="28sp" />
 
                 <TextView
                     android:id="@+id/tv_meal_month"
@@ -36,7 +36,16 @@
                     android:layout_alignBottom="@id/tv_meal_date"
                     android:layout_toEndOf="@id/tv_meal_date"
                     android:layout_toRightOf="@id/tv_meal_date"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_meal_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/tv_meal_month"
+                    android:layout_toEndOf="@id/tv_meal_month"
+                    android:layout_toRightOf="@id/tv_meal_month"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tv_meal_year"
@@ -50,7 +59,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="24dp">
 
                 <View
                     android:id="@+id/view_meal_breakfast_line"
@@ -83,7 +92,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="24dp">
 
                 <View
                     android:id="@+id/view_meal_lunch_line"
@@ -116,7 +125,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="24dp">
 
                 <View
                     android:id="@+id/view_meal_dinner_line"

@@ -50,6 +50,7 @@ public class MealCardFragment extends Fragment {
     private TextView mDateTV;
     private TextView mMonthTV;
     private TextView mYearTV;
+    private TextView mDayTV;
     private TextView mBreakfastTV;
     private TextView mLunchTV;
     private TextView mDinnerTV;
@@ -83,6 +84,7 @@ public class MealCardFragment extends Fragment {
         mBreakfastTV = (TextView) rootView.findViewById(R.id.tv_meal_breakfast_content);
         mLunchTV = (TextView) rootView.findViewById(R.id.tv_meal_lunch_content);
         mDinnerTV = (TextView) rootView.findViewById(R.id.tv_meal_dinner_content);
+        mDayTV=(TextView)rootView.findViewById(R.id.tv_meal_day);
 
         setDate(date);
 
@@ -110,8 +112,40 @@ public class MealCardFragment extends Fragment {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
 
-        mDateTV.setText(String.valueOf(cal.get(Calendar.DATE)));
-        mMonthTV.setText(cal.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.ENGLISH));
+        String day = "" ;
+
+        int dayNum = cal.get(Calendar.DAY_OF_WEEK) ;
+
+
+
+        switch(dayNum){
+            case 1:
+                day = "일요일";
+                break ;
+            case 2:
+                day = "월요일";
+                break ;
+            case 3:
+                day = "화요일";
+                break ;
+            case 4:
+                day = "수요일";
+                break ;
+            case 5:
+                day = "목요일";
+                break ;
+            case 6:
+                day = "금요일";
+                break ;
+            case 7:
+                day = "토요일";
+                break ;
+
+        }
+
+        mDayTV.setText(String.valueOf(cal.get(Calendar.DATE))+"일");
+        mDateTV.setText(day);
+        mMonthTV.setText(cal.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.KOREAN));
         mYearTV.setText(String.valueOf(cal.get(Calendar.YEAR)));
     }
 
