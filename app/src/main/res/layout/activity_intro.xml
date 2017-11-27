@@ -8,8 +8,8 @@
     tools:context="com.dms.beinone.application.activities.IntroActivity">
 
     <ImageView
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
         android:layout_marginTop="140dp"
         android:background="@color/intro_background"
         android:src="@drawable/dsm_intro_image"
