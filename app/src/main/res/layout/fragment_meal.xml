@@ -8,21 +8,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:paddingLeft="48dp"
-        android:paddingStart="48dp"
-        android:paddingTop="64dp"
-        android:paddingBottom="64dp"
-        android:paddingRight="48dp"
-        android:paddingEnd="48dp" />
+        android:paddingLeft="32dp"
+        android:paddingStart="32dp"
+        android:paddingTop="48dp"
+        android:paddingBottom="48dp"
+        android:paddingRight="32dp"
+        android:paddingEnd="32dp" />
 
     <ImageButton
         android:id="@+id/ib_meal_prev"
         android:layout_width="72dp"
         android:layout_height="32dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="80dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginBottom="46dp"
+        android:layout_marginLeft="64dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/button"
         android:elevation="4dp"
         android:src="@drawable/ic_chevron_left_white_24dp" />
@@ -34,10 +34,10 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="46dp"
-        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="64dp"
 
-        android:layout_marginRight="80dp"
+        android:layout_marginRight="64dp"
         android:background="@drawable/button"
         android:elevation="4dp"
         android:src="@drawable/ic_chevron_right_white_24dp" />
