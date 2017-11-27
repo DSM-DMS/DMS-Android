@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/intro_background"
+    tools:context="com.dms.beinone.application.activities.IntroActivity">
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="140dp"
+        android:background="@color/intro_background"
+        android:src="@drawable/dsm_intro_image"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/imageView"
+        />
+
+    <View
+        android:layout_alignTop="@id/imageView"
+        android:id="@+id/text1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/intro_background"
+        />
+
+    <View
+        android:background="@color/intro_background"
+        android:layout_alignBottom="@id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/text2"
+        />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_alignRight="@id/imageView"
+        android:background="@color/intro_background"
+        />
+
+</RelativeLayout>
