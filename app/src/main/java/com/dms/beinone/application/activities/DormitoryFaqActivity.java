@@ -43,10 +43,10 @@ public class DormitoryFaqActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dormitory_regulations);
-
+/*
         TextView appBarText = (TextView) findViewById(R.id.tv_toolbar_title);
         appBarText.setText("자주하는 질문");
-        appBarText.setGravity(Gravity.CENTER_HORIZONTAL);
+        appBarText.setGravity(Gravity.CENTER_HORIZONTAL);*/
 
         maRecyclerView = (RecyclerView) findViewById(R.id.dormitory_faq_recycler);
 

@@ -80,6 +80,9 @@ public class MyPageFragment extends Fragment {
         mMeritTV.setText("0");
         mDemeritTV.setText("0");
 
+        loadMyPage();
+
+
      /*   try {
             loadApplyStatus();
         } catch (IOException e) {
@@ -121,7 +124,6 @@ public class MyPageFragment extends Fragment {
             }
         });*/
 
-        loadMyPage();
         return view;
     }
 
@@ -159,8 +161,8 @@ public class MyPageFragment extends Fragment {
         mStayStatusTV.setText(account.getStayValue());
         String extensionStatus = ExtensionUtils.getStringFromClass(account.getExtension_11_seat());
         mExtensionStatusTV.setText(extensionStatus);
-        mMeritTV.setText(account.getMerit());
-        mDemeritTV.setText(account.getDemerit());
+/*        mMeritTV.setText(account.getMerit());
+        mDemeritTV.setText(account.getDemerit());*/
     }
 
 
@@ -245,9 +247,6 @@ public class MyPageFragment extends Fragment {
         }
     }
 
-
-
-
     private void loadMyPage() {
         if(AccountManager.isLogined(getActivity())){
             DMSService dmsService = HttpManager.createDMSService(getContext());
@@ -259,7 +258,8 @@ public class MyPageFragment extends Fragment {
                     switch (response.code()) {
                         case HTTP_OK:
                             Log.d("MYPAGE_DATA",response.body().toString());
-                            bind(response.body());
+                            Account account=response.body();
+                            bind(account);
                             break;
                         case HTTP_NO_CONTENT:
                             Toast.makeText(getContext(), R.string.my_page_load_no_content, Toast.LENGTH_SHORT).show();

@@ -41,7 +41,7 @@ public interface DMSService {
 
     int HTTP_INTERNAL_SERVER_ERROR = 500;
 
-    String SERVER_STUDENT_URL = "http://58.229.163.246:3000";
+    String SERVER_STUDENT_URL = "http://dsm2015.cafe24.com:3000";
 
 
     //Student
@@ -86,7 +86,7 @@ public interface DMSService {
     Call<Void> applyExtension_11(@Header("Authorization") String authorization, @Field("class") int clazz, @Field("seat") int seat);
 
     @GET("/extension/11")
-    Call<ApplyStatus> applyExtensionStatus_11(@Header("Authorization") String authorization);
+    Call<JsonObject> applyExtensionStatus_11(@Header("Authorization") String authorization);
 
     @FormUrlEncoded
     @POST("/extension/12")
@@ -111,26 +111,25 @@ public interface DMSService {
     Call<Void> applyGoingout(@Header("Authorization") String authorization,@Field("sat") boolean sat, @Field("sun") boolean sun);
 
     @GET("/goingout")
-    Call<ApplyStatus> applyGoingoutStatus(@Header("Authorization") String authorization);
+    Call<JsonArray> applyGoingoutStatus(@Header("Authorization") String authorization);
 
     @FormUrlEncoded
     @POST("/stay")
     Call<Void> applyStay(@Header("Authorization") String authorization,@Field("value") int value);
 
     @GET("/stay")
-    Call<ApplyStatus> applyStayStatus(@Header("Authorization") String authorization);
+    Call<JsonObject> applyStayStatus(@Header("Authorization") String authorization);
 
-
-    @GET("apply/all")
+    @GET("/apply/all")
     Call<ApplyStatus> loadApplyStatus();
 
-    @POST("survey/")
+    @POST("/survey/")
     Call<Void> uploadSurvey(@Field("id") int id);
 
-    @GET("survey")
+    @GET("/survey")
     Call<JsonObject> loadSurveyList();
 
-    @GET("survey/")
+    @GET("/survey/")
     Call<JsonObject> loadSurvey(@Query("id")int id);
 
 }

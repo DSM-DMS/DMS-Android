@@ -11,48 +11,72 @@ public class Account {
 
     @SerializedName("stay_value")
     private int stayValue;
+    @SerializedName("number")
     private int number;
-
     @SerializedName("stayup_date")
-    private String signupDate;
+    private String signUpDate;
+    @SerializedName("name")
     private String name;
-
     @SerializedName("goingout_sun")
-    private String goingoutSun;
+    private String goingOutSun;
     @SerializedName("goingout_sat")
-    private String goingoutSat;
-
+    private String goingOutSat;
+    @SerializedName("extension_11_class")
     private int extension_11_class;
+    @SerializedName("extension_12_class")
     private int extension_12_class;
+    @SerializedName("extension_11_seat")
     private int extension_11_seat;
+    @SerializedName("extension_12_seat")
     private int extension_12_seat;
 
 
-    private int merit;
-    private int demerit;
-
-    public String getSignupDate() {
-        return signupDate;
+    public int getStayValue() {
+        return stayValue;
     }
 
-    public void setSignupDate(String signupDate) {
-        this.signupDate = signupDate;
+    public void setStayValue(int stayValue) {
+        this.stayValue = stayValue;
     }
 
-    public String getGoingoutSun() {
-        return goingoutSun;
+    public int getNumber() {
+        return number;
     }
 
-    public void setGoingoutSun(String goingoutSun) {
-        this.goingoutSun = goingoutSun;
+    public void setNumber(int number) {
+        this.number = number;
     }
 
-    public String getGoingoutSat() {
-        return goingoutSat;
+    public String getSignUpDate() {
+        return signUpDate;
     }
 
-    public void setGoingoutSat(String goingoutSat) {
-        this.goingoutSat = goingoutSat;
+    public void setSignUpDate(String signUpDate) {
+        this.signUpDate = signUpDate;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getGoingOutSun() {
+        return goingOutSun;
+    }
+
+    public void setGoingOutSun(String goingOutSun) {
+        this.goingOutSun = goingOutSun;
+    }
+
+    public String getGoingOutSat() {
+        return goingOutSat;
+    }
+
+    public void setGoingOutSat(String goingOutSat) {
+        this.goingOutSat = goingOutSat;
     }
 
     public int getExtension_11_class() {
@@ -87,43 +111,7 @@ public class Account {
         this.extension_12_seat = extension_12_seat;
     }
 
-    public int getNumber() {
-        return number;
-    }
 
-    public void setNumber(int number) {
-        this.number = number;
-    }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getMerit() {
-        return merit;
-    }
-
-    public void setMerit(int merit) {
-        this.merit = merit;
-    }
-
-    public int getDemerit() {
-        return demerit;
-    }
-
-    public void setDemerit(int demerit) {
-        this.demerit = demerit;
-    }
-
-    public int getStayValue() {
-        return stayValue;
-    }
-
-    public void setStayValue(int stayValue) {
-        this.stayValue = stayValue;
-    }
 }

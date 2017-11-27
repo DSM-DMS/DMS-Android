@@ -40,9 +40,9 @@ public class DormitoryNoticeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dormitory_notice);
 
-        TextView appBarText = (TextView) findViewById(R.id.tv_toolbar_title);
+     /*   TextView appBarText = (TextView) findViewById(R.id.tv_toolbar_title);
         appBarText.setText("공지사항");
-        appBarText.setGravity(Gravity.CENTER_HORIZONTAL);
+        appBarText.setGravity(Gravity.CENTER_HORIZONTAL);*/
 
         mRecyclerView = (RecyclerView) findViewById(R.id.dormitory_notice_recycler);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);

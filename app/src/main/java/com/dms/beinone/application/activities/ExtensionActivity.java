@@ -64,7 +64,7 @@ public class ExtensionActivity extends AppCompatActivity {
 
     private int mCurrentClass;
     private List<List<String>> maps;
-    private Boolean check;
+    private Boolean check=false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -91,10 +91,10 @@ public class ExtensionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(check==true){
                     apply_12(mCurrentClass, (int) mButtonGroup.getSelectedButton().getTag());
-                    changeClass_12(Class.CLASS_GA);
+                    changeClass_12(mCurrentClass);
                 }else{
                     apply_11(mCurrentClass, (int) mButtonGroup.getSelectedButton().getTag());
-                    changeClass_11(Class.CLASS_GA);
+                    changeClass_11(mCurrentClass);
                 }
             }
         });
@@ -112,10 +112,10 @@ public class ExtensionActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked==true) {
-                    changeClass_12(Class.CLASS_GA);
+                    changeClass_12(mCurrentClass);
                     check=true;
                 } else {
-                    changeClass_11(Class.CLASS_GA);
+                    changeClass_11(mCurrentClass);
                     check=false;
                 }
             }

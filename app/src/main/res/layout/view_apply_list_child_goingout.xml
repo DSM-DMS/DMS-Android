@@ -99,7 +99,9 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_below="@id/iv_apply_list_child_goingout"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="32dp"
+            android:elevation="8dp"
+            android:layout_marginBottom="12dp"
             android:background="@drawable/button"
             android:text="@string/apply"
             android:textColor="@android:color/white" />

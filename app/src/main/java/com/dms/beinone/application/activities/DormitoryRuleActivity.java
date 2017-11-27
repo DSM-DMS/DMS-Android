@@ -44,10 +44,10 @@ public class DormitoryRuleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dormitory_rule);
-
+/*
         TextView appBarText = (TextView) findViewById(R.id.tv_toolbar_title);
         appBarText.setText("기숙사 규정");
-        appBarText.setGravity(Gravity.CENTER_HORIZONTAL);
+        appBarText.setGravity(Gravity.CENTER_HORIZONTAL);*/
 
         DMSService service= HttpManager.createDMSService(getApplicationContext());
 

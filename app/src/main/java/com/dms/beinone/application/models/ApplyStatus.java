@@ -8,39 +8,57 @@ import com.google.gson.annotations.SerializedName;
 
 public class ApplyStatus {
 
-    @SerializedName("extension_applied")
-    private boolean extensionApplied;
-    @SerializedName("class")
-    private int extensionClass;
+
+
+    @SerializedName("extension_11_class")
+    private boolean extensionClass11;
+    @SerializedName("extension_11_seat")
+    private int extensionSeat11;
+
+    @SerializedName("extension_12_class")
+    private boolean extensionClass12;
+    @SerializedName("extension_12_seat")
+    private int extensionSeat12;
+
     @SerializedName("name")
     private String extensionName;
 
-    @SerializedName("goingout_applied")
-    private boolean goingoutApplied;
-    @SerializedName("sat")
-    private boolean goingoutSat;
-    @SerializedName("sun")
-    private boolean goingoutSun;
+    private boolean sat;
+    private boolean sun;
 
-    @SerializedName("stay_applied")
-    private boolean stayApplied;
-    @SerializedName("value")
-    private int stayValue;
+    @SerializedName("signup_date")
+    private String signUpDate;
 
-    public boolean isExtensionApplied() {
-        return extensionApplied;
+    public boolean isExtensionClass11() {
+        return extensionClass11;
     }
 
-    public void setExtensionApplied(boolean extensionApplied) {
-        this.extensionApplied = extensionApplied;
+    public void setExtensionClass11(boolean extensionClass11) {
+        this.extensionClass11 = extensionClass11;
     }
 
-    public int getExtensionClass() {
-        return extensionClass;
+    public int getExtensionSeat11() {
+        return extensionSeat11;
     }
 
-    public void setExtensionClass(int extensionClass) {
-        this.extensionClass = extensionClass;
+    public void setExtensionSeat11(int extensionSeat11) {
+        this.extensionSeat11 = extensionSeat11;
+    }
+
+    public boolean isExtensionClass12() {
+        return extensionClass12;
+    }
+
+    public void setExtensionClass12(boolean extensionClass12) {
+        this.extensionClass12 = extensionClass12;
+    }
+
+    public int getExtensionSeat12() {
+        return extensionSeat12;
+    }
+
+    public void setExtensionSeat12(int extensionSeat12) {
+        this.extensionSeat12 = extensionSeat12;
     }
 
     public String getExtensionName() {
@@ -51,36 +69,28 @@ public class ApplyStatus {
         this.extensionName = extensionName;
     }
 
-    public boolean isGoingoutApplied() {
-        return goingoutApplied;
+    public boolean isSat() {
+        return sat;
     }
 
-    public void setGoingoutApplied(boolean goingoutApplied) {
-        this.goingoutApplied = goingoutApplied;
+    public void setSat(boolean sat) {
+        this.sat = sat;
     }
 
-    public boolean isGoingoutSat() {
-        return goingoutSat;
+    public boolean isSun() {
+        return sun;
     }
 
-    public void setGoingoutSat(boolean goingoutSat) {
-        this.goingoutSat = goingoutSat;
+    public void setSun(boolean sun) {
+        this.sun = sun;
     }
 
-    public boolean isGoingoutSun() {
-        return goingoutSun;
+    public String getSignUpDate() {
+        return signUpDate;
     }
 
-    public void setGoingoutSun(boolean goingoutSun) {
-        this.goingoutSun = goingoutSun;
-    }
-
-    public boolean isStayApplied() {
-        return stayApplied;
-    }
-
-    public void setStayApplied(boolean stayApplied) {
-        this.stayApplied = stayApplied;
+    public void setSignUpDate(String signUpDate) {
+        this.signUpDate = signUpDate;
     }
 
     public int getStayValue() {
@@ -90,4 +100,9 @@ public class ApplyStatus {
     public void setStayValue(int stayValue) {
         this.stayValue = stayValue;
     }
+
+    @SerializedName("value")
+    private int stayValue;
+
+
 }
