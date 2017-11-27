@@ -11,6 +11,8 @@
 
     <color name="activatedBar">#b8e8ff</color>
 
+    <color name="intro_background">#7db1db</color>;
+
     <color name="applyList0">#B2D4E6</color>
     <color name="applyList1">#A7C9DA</color>
     <color name="applyList2">#89B9D1</color>
