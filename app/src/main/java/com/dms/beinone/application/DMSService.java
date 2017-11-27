@@ -98,6 +98,9 @@ public interface DMSService {
     @GET("/mypage")
     Call<Account> loadMyPage(@Header("Authorization") String authorization);
 
+    @GET("/mypage")
+    Call<JsonObject> loadMyPage_json(@Header("Authorization") String authorization);
+
     @FormUrlEncoded
     @POST("/account/register/student")
     Call<Void> register(@Field("uid") String uid, @Field("id") String id, @Field("password") String password);

@@ -58,7 +58,7 @@ public class LogoutDialogFragment extends DialogFragment {
     }
 
     private void logout() {
-        Toast.makeText(context,getString(R.string.logout), Toast.LENGTH_SHORT).show();
+        Toast.makeText(context,getString(R.string.logout_dialog_message), Toast.LENGTH_SHORT).show();
         AccountManager.setLogined(context,false);
         AccountManager.setToken(context,"JWT ");
         //getTargetFragment().getActivity().

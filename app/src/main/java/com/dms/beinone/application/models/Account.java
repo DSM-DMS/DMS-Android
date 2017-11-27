@@ -18,9 +18,9 @@ public class Account {
     @SerializedName("name")
     private String name;
     @SerializedName("goingout_sun")
-    private String goingOutSun;
+    private boolean goingOutSun;
     @SerializedName("goingout_sat")
-    private String goingOutSat;
+    private boolean goingOutSat;
     @SerializedName("extension_11_class")
     private int extension_11_class;
     @SerializedName("extension_12_class")
@@ -29,6 +29,21 @@ public class Account {
     private int extension_11_seat;
     @SerializedName("extension_12_seat")
     private int extension_12_seat;
+
+    public Account(int stayValue, int number, String signUpDate, String name, boolean goingOutSun, boolean goingOutSat, int extension_11_class, int extension_12_class, int extension_11_seat, int extension_12_seat) {
+        this.stayValue = stayValue;
+        this.number = number;
+        this.signUpDate = signUpDate;
+        this.name = name;
+        this.goingOutSun = goingOutSun;
+        this.goingOutSat = goingOutSat;
+        this.extension_11_class = extension_11_class;
+        this.extension_12_class = extension_12_class;
+        this.extension_11_seat = extension_11_seat;
+        this.extension_12_seat = extension_12_seat;
+    }
+
+
 
 
     public int getStayValue() {
@@ -63,19 +78,19 @@ public class Account {
         this.name = name;
     }
 
-    public String getGoingOutSun() {
+    public boolean getGoingOutSun() {
         return goingOutSun;
     }
 
-    public void setGoingOutSun(String goingOutSun) {
+    public void setGoingOutSun(boolean goingOutSun) {
         this.goingOutSun = goingOutSun;
     }
 
-    public String getGoingOutSat() {
+    public boolean getGoingOutSat() {
         return goingOutSat;
     }
 
-    public void setGoingOutSat(String goingOutSat) {
+    public void setGoingOutSat(boolean goingOutSat) {
         this.goingOutSat = goingOutSat;
     }
 

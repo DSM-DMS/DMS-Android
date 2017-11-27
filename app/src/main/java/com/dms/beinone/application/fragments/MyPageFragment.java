@@ -33,7 +33,10 @@ import com.dms.beinone.application.models.Meal;
 import com.dms.beinone.application.models.Token;
 import com.dms.beinone.application.utils.ExtensionUtils;
 import com.dms.beinone.application.utils.StayUtils;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import java.io.IOException;
 
@@ -80,7 +83,7 @@ public class MyPageFragment extends Fragment {
         mMeritTV.setText("0");
         mDemeritTV.setText("0");
 
-        loadMyPage();
+        loadMyPage_json();
 
 
      /*   try {
@@ -158,8 +161,9 @@ public class MyPageFragment extends Fragment {
     }
 
     private void bind(Account account) {
-        mStayStatusTV.setText(account.getStayValue());
-        String extensionStatus = ExtensionUtils.getStringFromClass(account.getExtension_11_seat());
+
+        mStayStatusTV.setText(StayUtils.getStringFromStayStatus(account.getStayValue()));
+        String extensionStatus = ExtensionUtils.getStringFromClass(account.getExtension_11_class());
         mExtensionStatusTV.setText(extensionStatus);
 /*        mMeritTV.setText(account.getMerit());
         mDemeritTV.setText(account.getDemerit());*/
@@ -248,9 +252,10 @@ public class MyPageFragment extends Fragment {
     }
 
     private void loadMyPage() {
+        Log.d("loadMypage 함수 호출","함수 호출");
         if(AccountManager.isLogined(getActivity())){
             DMSService dmsService = HttpManager.createDMSService(getContext());
-            Call<Account> call = dmsService.loadMyPage(HttpManager.token);
+            Call<Account> call = dmsService.loadMyPage(AccountManager.isToken(getActivity()));
             call.enqueue(new Callback<Account>() {
                 @Override
                 public void onResponse(Call<Account> call, Response<Account> response) {
@@ -258,8 +263,11 @@ public class MyPageFragment extends Fragment {
                     switch (response.code()) {
                         case HTTP_OK:
                             Log.d("MYPAGE_DATA",response.body().toString());
+
                             Account account=response.body();
-                            bind(account);
+                            Log.d("MYPAGE_DATA",account.getName());
+
+                            //bind(account);
                             break;
                         case HTTP_NO_CONTENT:
                             Toast.makeText(getContext(), R.string.my_page_load_no_content, Toast.LENGTH_SHORT).show();
@@ -274,6 +282,63 @@ public class MyPageFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<Account> call, Throwable t) {
+                    t.printStackTrace();
+                }
+
+            });
+        }else {
+            Toast.makeText(getActivity(),"로그인을 해주세요",Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private void loadMyPage_json() {
+        Log.d("loadMypage 함수 호출","함수 호출");
+        if(AccountManager.isLogined(getActivity())){
+            DMSService dmsService = HttpManager.createDMSService(getContext());
+            Call<JsonObject> call = dmsService.loadMyPage_json(AccountManager.isToken(getActivity()));
+
+            call.enqueue(new Callback<JsonObject>() {
+                @Override
+                public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                    Log.d("MYPAGE_CODE",String.valueOf(response.code()));
+                    switch (response.code()) {
+                        case HTTP_OK:
+                            Log.d("MYPAGE_DATA",response.body().toString());
+
+
+
+                            JsonParser parser = new JsonParser();
+                            JsonElement element = parser.parse(response.body().toString());
+                            int extension_11_class=element.getAsJsonObject().get("extension_11_class").getAsInt();
+                            int extension_11_seat=element.getAsJsonObject().get("extension_11_seat").getAsInt();
+                            int extension_12_class=element.getAsJsonObject().get("extension_12_class").getAsInt();
+                            int extension_12_seat=element.getAsJsonObject().get("extension_12_seat").getAsInt();
+                            boolean goingout_sat=element.getAsJsonObject().get("goingout_sat").getAsBoolean();
+                            boolean goingout_sun=element.getAsJsonObject().get("goingout_sun").getAsBoolean();
+                            String name=element.getAsJsonObject().get("name").getAsString();
+                            int number=element.getAsJsonObject().get("number").getAsInt();
+                            String signup_date=element.getAsJsonObject().get("signup_date").getAsString();
+                            int stay_value=element.getAsJsonObject().get("stay_value").getAsInt();
+
+                            Toast.makeText(getActivity(),name,Toast.LENGTH_SHORT).show();
+
+                            bind(new Account(stay_value,number,signup_date,name,goingout_sun,goingout_sat,extension_11_class,extension_12_class
+                            ,extension_11_seat,extension_12_seat));
+                            break;
+                        case HTTP_NO_CONTENT:
+                            Toast.makeText(getContext(), R.string.my_page_load_no_content, Toast.LENGTH_SHORT).show();
+                            break;
+                        case HTTP_BAD_REQUEST:
+                            break;
+                        case HTTP_INTERNAL_SERVER_ERROR:
+                            Toast.makeText(getContext(), R.string.my_page_load_internal_server_error, Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<JsonObject> call, Throwable t) {
                     t.printStackTrace();
                 }
 
