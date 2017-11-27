@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:opacity="opaque">
+    <item android:drawable="@color/colorSplash"/>
+    <item android:gravity="center_horizontal"
+        android:top="156dp"
+        android:width="174dp" android:height="174dp" android:drawable="@drawable/app_logo" />
+</layer-list>
