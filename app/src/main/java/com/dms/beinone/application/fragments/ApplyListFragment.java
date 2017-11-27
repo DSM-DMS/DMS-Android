@@ -55,6 +55,8 @@ public class ApplyListFragment extends Fragment {
 
     private ExpandableLayout mExpandableLayout;
     private TextView loadStatus;
+    private int apply_11;
+    private int apply_12;
 
     @Nullable
     @Override
@@ -102,7 +104,7 @@ public class ApplyListFragment extends Fragment {
 
         try {
             loadApplyStay();
-            loadApplyExtension_11();
+            loadApplyExtension();
 
 //            loadApplyExtension_11(AccountManager.isToken(getActivity()));
             loadApplyGoingout();
@@ -178,25 +180,30 @@ public class ApplyListFragment extends Fragment {
         return view;
     }
 
-    private void setExtensionApplyStatus(Class clazz) {
+    private void setExtensionApplyStatus(int applyStatus_11,int applyStatus_12) {
         View view = mExpandableLayout.getChildAt(1);
         TextView statusElevenTV = (TextView) view.findViewById(R.id.tv_extension_apply_list_child_status_11);
         TextView statusTwelveTV = (TextView) view.findViewById(R.id.tv_extension_apply_list_child_status_12);
 
         statusElevenTV.setText("미신청");
+        statusTwelveTV.setText("미신청");
 
-        if (clazz == null) {
+        if (applyStatus_11 == 0) {
             statusElevenTV.setText(R.string.unapplied);
+        } else  if(applyStatus_12==0){
             statusTwelveTV.setText(R.string.unapplied);
         } else {
-            statusElevenTV.setText(ExtensionUtils.getStringFromClass(clazz.getNo()));
-            statusTwelveTV.setText(ExtensionUtils.getStringFromClass(clazz.getNo()));
+            statusElevenTV.setText(ExtensionUtils.getStringFromClass(applyStatus_11));
+            statusTwelveTV.setText(ExtensionUtils.getStringFromClass(applyStatus_12));
         }
     }
 
     private void setStayApplyStatus(int value) {
         View view = mExpandableLayout.getChildAt(3);
         TextView statusTV = (TextView) view.findViewById(R.id.tv_apply_list_child_status);
+
+        statusTV.setText(R.string.unapplied);
+
         if(AccountManager.isLogined(getActivity())==true){
             if (value == -1) {
                 statusTV.setText(R.string.unapplied);
@@ -225,6 +232,8 @@ public class ApplyListFragment extends Fragment {
     private void loadApplyStay() throws IOException {
 
 
+
+
         Log.d("loadApplayStay","함수호출");
         DMSService dmsService = HttpManager.createDMSService(getContext());
         Call<JsonObject> call = dmsService.applyStayStatus(AccountManager.isToken(getActivity()));
@@ -241,8 +250,8 @@ public class ApplyListFragment extends Fragment {
 
                         JsonParser parser = new JsonParser();
                         JsonElement element = parser.parse(response.body().toString());
-                        int stayValue = element.getAsJsonObject().get("value").getAsInt();
-                        setStayApplyStatus(stayValue);
+                        int stayValue_11 = element.getAsJsonObject().get("value").getAsInt();
+                        setStayApplyStatus(stayValue_11);
                         break;
                     case HTTP_NO_CONTENT:
                         break;
@@ -253,6 +262,12 @@ public class ApplyListFragment extends Fragment {
                 t.getMessage();
             }
         });
+
+
+
+
+
+
 
 
     }
@@ -290,7 +305,9 @@ public class ApplyListFragment extends Fragment {
         });
     }
 
-    private void loadApplyExtension_11() throws IOException{
+    private void loadApplyExtension() throws IOException{
+
+
         DMSService dmsService = HttpManager.createDMSService_STUDENT(getContext());
         Call<JsonObject> call=dmsService.applyExtensionStatus_11(AccountManager.isToken(getActivity()));
         call.enqueue(new Callback<JsonObject>() {
@@ -305,10 +322,9 @@ public class ApplyListFragment extends Fragment {
                         JsonParser parser = new JsonParser();
                         JsonElement element = parser.parse(response.body().toString());
 
-                        int clazz=element.getAsJsonObject().get("class").getAsInt();
+                        apply_11=element.getAsJsonObject().get("class").getAsInt();
                         int seat=element.getAsJsonObject().get("seat").getAsInt();
 
-                        setExtensionApplyStatus(new Class(clazz,"name"));
                       /*  if (applyStatus.isExtensionApplied()) {
                             int no = applyStatus.getExtensionClass();
                             String name = applyStatus.getExtensionName();
@@ -325,6 +341,39 @@ public class ApplyListFragment extends Fragment {
 
             }
         });
+
+        dmsService.applyExtensionStatus_12(AccountManager.isToken(getActivity())).enqueue(new Callback<ApplyStatus>() {
+            @Override
+            public void onResponse(Call<ApplyStatus> call, Response<ApplyStatus> response) {
+                Log.d("GET_Extension",String.valueOf(response.code()));
+                switch (response.code()){
+                    case HTTP_OK:
+                        Log.d("GET_Extension",response.body().toString());
+
+                        JsonParser parser = new JsonParser();
+                        JsonElement element = parser.parse(response.body().toString());
+
+                        apply_12=element.getAsJsonObject().get("class").getAsInt();
+                        int seat=element.getAsJsonObject().get("seat").getAsInt();
+
+                      /*  if (applyStatus.isExtensionApplied()) {
+                            int no = applyStatus.getExtensionClass();
+                            String name = applyStatus.getExtensionName();
+                            setExtensionApplyStatus(new Class(no, name));
+                        }*/
+                        break;
+                    case HTTP_NO_CONTENT:
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApplyStatus> call, Throwable t) {
+
+            }
+        });
+
+        setExtensionApplyStatus(apply_11,apply_12);
     }
 
    /* private void loadApplyStatus() throws IOException {
