@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true">
+
+    <View
+        android:id="@+id/bar_apply_list_child"
+        android:layout_width="4dp"
+        android:layout_height="match_parent"
+        android:background="@color/activatedBar" />
+
+    <RelativeLayout
+        android:id="@+id/layout_extension_apply_list_child"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/iv_extension_apply_list_child"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/iv_extension_apply_list_child"
+            android:layout_toLeftOf="@id/iv_extension_apply_list_child"
+            android:layout_toStartOf="@id/iv_extension_apply_list_child"
+            >
+
+            <TextView
+                android:id="@+id/tv_extension_apply_list_child_status_11"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="24dp"
+                android:padding="16dp"
+                android:background="@drawable/speech_bubble"
+                android:textSize="24sp"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/tv_extension_apply_list_child_status_12"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp"
+                android:padding="16dp"
+                android:background="@drawable/speech_bubble"
+                android:textSize="24sp"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/ib_extension_apply_list_child_enter"
+            android:layout_width="72dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:elevation="6dp"
+            android:layout_marginBottom="12dp"
+            android:layout_below="@id/iv_extension_apply_list_child"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/button"
+            android:src="@drawable/ic_chevron_right_white_24dp" />
+
+    </RelativeLayout>
+</LinearLayout>

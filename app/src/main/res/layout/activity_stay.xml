@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/appllist_background"
+    >
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -20,6 +22,7 @@
         android:orientation="vertical">
 
         <RadioButton
+            android:textColor="@color/white"
             android:id="@+id/rb_stay_friday_go"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,6 +37,7 @@
             android:layout_height="32dp" />
 
         <RadioButton
+            android:textColor="@color/white"
             android:id="@+id/rb_stay_saturday_go"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,6 +51,7 @@
             android:layout_height="32dp" />
 
         <RadioButton
+            android:textColor="@color/white"
             android:id="@+id/rb_stay_saturday_come"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,6 +65,7 @@
             android:layout_height="32dp" />
 
         <RadioButton
+            android:textColor="@color/white"
             android:id="@+id/rb_stay_stay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

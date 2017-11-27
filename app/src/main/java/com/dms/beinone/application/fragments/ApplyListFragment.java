@@ -26,7 +26,6 @@ import com.dms.beinone.application.managers.HttpManager;
 import com.dms.beinone.application.models.ApplyStatus;
 import com.dms.beinone.application.models.Class;
 import com.dms.beinone.application.models.Goingout;
-import com.dms.beinone.application.models.Notice;
 import com.dms.beinone.application.utils.ExtensionUtils;
 import com.dms.beinone.application.utils.StayUtils;
 import com.dms.beinone.application.views.custom.ExpandableLayout;
@@ -40,14 +39,11 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.dms.beinone.application.DMSService.HTTP_BAD_REQUEST;
-import static com.dms.beinone.application.DMSService.HTTP_INTERNAL_SERVER_ERROR;
 import static com.dms.beinone.application.DMSService.HTTP_NO_CONTENT;
 import static com.dms.beinone.application.DMSService.HTTP_OK;
 
@@ -78,7 +74,7 @@ public class ApplyListFragment extends Fragment {
                     public void onClick(View v) {
                         startActivity(new Intent(getContext(), ExtensionActivity.class));
                     }
-                }),false);
+                },true),false);
         mExpandableLayout.addView(createParentView("잔류신청", ContextCompat.getColor(getContext(), R.color.applyList2)),
                 createChildView(ContextCompat.getColor(getContext(), R.color.applyList2), R.drawable.whale , new View.OnClickListener() {
                     @Override
@@ -139,7 +135,20 @@ public class ApplyListFragment extends Fragment {
         ImageButton enterIB = (ImageButton) view.findViewById(R.id.ib_apply_list_child_enter);
         enterIB.setOnClickListener(listener);
 
+        return view;
+    }
 
+    private View createChildView(int backgroundColor, int image,View.OnClickListener listener, boolean key) { // true 든 false 든 어떤
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.view_extension_apply_list_child, null);   // boolean을 넘겨주면
+                                                                                                             // 오버로딩이 되어 뷰가 생성이 된다.
+        View layout = view.findViewById(R.id.layout_extension_apply_list_child);
+        layout.setBackgroundColor(backgroundColor);
+
+        ImageView imageView = (ImageView) view.findViewById(R.id.iv_extension_apply_list_child);
+        imageView.setImageResource(image);
+
+        ImageButton enterExtensionIB = (ImageButton) view.findViewById(R.id.ib_extension_apply_list_child_enter);
+        enterExtensionIB.setOnClickListener(listener);
 
         return view;
     }
@@ -171,14 +180,17 @@ public class ApplyListFragment extends Fragment {
 
     private void setExtensionApplyStatus(Class clazz) {
         View view = mExpandableLayout.getChildAt(1);
-        TextView statusTV = (TextView) view.findViewById(R.id.tv_apply_list_child_status);
+        TextView statusElevenTV = (TextView) view.findViewById(R.id.tv_extension_apply_list_child_status_11);
+        TextView statusTwelveTV = (TextView) view.findViewById(R.id.tv_extension_apply_list_child_status_12);
 
-        statusTV.setText("미신청");
+        statusElevenTV.setText("미신청");
 
         if (clazz == null) {
-            statusTV.setText(R.string.unapplied);
+            statusElevenTV.setText(R.string.unapplied);
+            statusTwelveTV.setText(R.string.unapplied);
         } else {
-            statusTV.setText(ExtensionUtils.getStringFromClass(clazz.getNo()));
+            statusElevenTV.setText(ExtensionUtils.getStringFromClass(clazz.getNo()));
+            statusTwelveTV.setText(ExtensionUtils.getStringFromClass(clazz.getNo()));
         }
     }
 
@@ -194,9 +206,6 @@ public class ApplyListFragment extends Fragment {
         }else{
             statusTV.setText("로그인을 해주세요");
         }
-
-
-
     }
 
     private void setGoingoutApplyStatus(Goingout goingout) {
