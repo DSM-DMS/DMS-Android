@@ -72,8 +72,8 @@ public class MyPageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_page, container, false);
 
-        mStayStatusTV = (TextView) view.findViewById(R.id.tv_my_page_stay_status);
-        mExtensionStatusTV = (TextView) view.findViewById(R.id.tv_my_page_extension_status);
+        mStayStatusTV = (TextView) view.findViewById(R.id.my_page_stay_tv);
+        mExtensionStatusTV = (TextView) view.findViewById(R.id.my_page_extension_11_tv);
         mMeritTV = (TextView) view.findViewById(R.id.tv_my_page_merit);
         mDemeritTV = (TextView) view.findViewById(R.id.tv_my_page_demerit);
         mLogoutMenu = view.findViewById(R.id.layout_my_page_logout);

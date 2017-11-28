@@ -220,6 +220,8 @@
     <string name="comment_upload_internal_server_error">오류로 인해 댓글을 작성하지 못했습니다.</string>
 
     <!-- My Page -->
+    <string name="my_page_extension_11">11: </string>
+    <string name="my_page_extension_12">12: </string>
     <string name="my_page_merit">상점</string>
     <string name="my_page_demerit">벌점</string>
     <string name="my_page_qna_list">작성한 질문 목록</string>
