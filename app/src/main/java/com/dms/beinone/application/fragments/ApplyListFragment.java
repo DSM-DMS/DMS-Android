@@ -28,6 +28,7 @@ import com.dms.beinone.application.models.Class;
 import com.dms.beinone.application.models.Goingout;
 import com.dms.beinone.application.utils.ExtensionUtils;
 import com.dms.beinone.application.utils.StayUtils;
+import com.dms.beinone.application.utils.StringUtils;
 import com.dms.beinone.application.views.custom.ExpandableLayout;
 import com.dms.boxfox.networking.HttpBox;
 import com.google.gson.Gson;
@@ -76,7 +77,7 @@ public class ApplyListFragment extends Fragment {
                     public void onClick(View v) {
                         startActivity(new Intent(getContext(), ExtensionActivity.class));
                     }
-                },true),false);
+                }),false);
         mExpandableLayout.addView(createParentView("잔류신청", ContextCompat.getColor(getContext(), R.color.applyList2)),
                 createChildView(ContextCompat.getColor(getContext(), R.color.applyList2), R.drawable.whale , new View.OnClickListener() {
                     @Override
@@ -140,21 +141,6 @@ public class ApplyListFragment extends Fragment {
         return view;
     }
 
-    private View createChildView(int backgroundColor, int image,View.OnClickListener listener, boolean key) { // true 든 false 든 어떤
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.view_extension_apply_list_child, null);   // boolean을 넘겨주면
-                                                                                                             // 오버로딩이 되어 뷰가 생성이 된다.
-        View layout = view.findViewById(R.id.layout_extension_apply_list_child);
-        layout.setBackgroundColor(backgroundColor);
-
-        ImageView imageView = (ImageView) view.findViewById(R.id.iv_extension_apply_list_child);
-        imageView.setImageResource(image);
-
-        ImageButton enterExtensionIB = (ImageButton) view.findViewById(R.id.ib_extension_apply_list_child_enter);
-        enterExtensionIB.setOnClickListener(listener);
-
-        return view;
-    }
-
     private View createGoingoutChildView() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.view_apply_list_child_goingout, null);
 
@@ -182,19 +168,30 @@ public class ApplyListFragment extends Fragment {
 
     private void setExtensionApplyStatus(int applyStatus_11,int applyStatus_12) {
         View view = mExpandableLayout.getChildAt(1);
-        TextView statusElevenTV = (TextView) view.findViewById(R.id.tv_extension_apply_list_child_status_11);
-        TextView statusTwelveTV = (TextView) view.findViewById(R.id.tv_extension_apply_list_child_status_12);
+        TextView statusExtensionTV = (TextView) view.findViewById(R.id.tv_apply_list_child_status);
+        StringBuffer extensionStatusText = new StringBuffer();
+        extensionStatusText.append("11시 "); // 11시
+        extensionStatusText.append("미신청"); // 11시 미신청
+        extensionStatusText.append("\n"); // 11시 미신청 \n
+        extensionStatusText.append("12시 "); // 11시 미신청 \n 12시
+        extensionStatusText.append("미신청");// 11시 미신청 \n12시 미신청
 
-        statusElevenTV.setText("미신청");
-        statusTwelveTV.setText("미신청");
+        if(applyStatus_11 == 0 && applyStatus_12 == 0) {// applyStatus_11 == 0 , applyStatus_12 == 0
 
-        if (applyStatus_11 == 0) {
-            statusElevenTV.setText(R.string.unapplied);
-        } else  if(applyStatus_12==0){
-            statusTwelveTV.setText(R.string.unapplied);
-        } else {
-            statusElevenTV.setText(ExtensionUtils.getStringFromClass(applyStatus_11));
-            statusTwelveTV.setText(ExtensionUtils.getStringFromClass(applyStatus_12));
+            statusExtensionTV.setText(extensionStatusText.toString());
+        } else if(applyStatus_11 == 1) {// applyStatus_11 > 0 , applyStatus_12 == 0
+
+            extensionStatusText.replace(5,7, ExtensionUtils.getStringFromClass(applyStatus_11));
+            statusExtensionTV.setText(extensionStatusText.toString());
+        } else if(applyStatus_12 == 1) {// applyStatus_11 == 0 , applyStatus_12 > 0
+
+            extensionStatusText.replace(14,16, ExtensionUtils.getStringFromClass(applyStatus_12));
+            statusExtensionTV.setText(extensionStatusText.toString());
+        } else { // applyStatus_11 > 0 , applyStatus_12 > 0
+
+            extensionStatusText.replace(5,7, ExtensionUtils.getStringFromClass(applyStatus_11));
+            extensionStatusText.replace(14,16, ExtensionUtils.getStringFromClass(applyStatus_12));
+            statusExtensionTV.setText(extensionStatusText.toString());
         }
     }
 
@@ -244,7 +241,6 @@ public class ApplyListFragment extends Fragment {
                 Log.d("loadApplyStay_CODE",String.valueOf(response.code()));
                 switch (response.code()) {
                     case HTTP_OK:
-                        Toast.makeText(getActivity(), response.body().toString(), Toast.LENGTH_LONG).show();
                         Gson gson=new Gson();
                         Log.d("stay_value_json",response.body().toString());
 
@@ -342,9 +338,9 @@ public class ApplyListFragment extends Fragment {
             }
         });
 
-        dmsService.applyExtensionStatus_12(AccountManager.isToken(getActivity())).enqueue(new Callback<ApplyStatus>() {
+        dmsService.applyExtensionStatus_12(AccountManager.isToken(getActivity())).enqueue(new Callback<JsonObject>() {
             @Override
-            public void onResponse(Call<ApplyStatus> call, Response<ApplyStatus> response) {
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 Log.d("GET_Extension",String.valueOf(response.code()));
                 switch (response.code()){
                     case HTTP_OK:
@@ -368,7 +364,7 @@ public class ApplyListFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ApplyStatus> call, Throwable t) {
+            public void onFailure(Call<JsonObject> call, Throwable t) {
 
             }
         });

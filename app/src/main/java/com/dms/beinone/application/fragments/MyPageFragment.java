@@ -321,7 +321,6 @@ public class MyPageFragment extends Fragment {
                             String signup_date=element.getAsJsonObject().get("signup_date").getAsString();
                             int stay_value=element.getAsJsonObject().get("stay_value").getAsInt();
 
-                            Toast.makeText(getActivity(),name,Toast.LENGTH_SHORT).show();
 
                             bind(new Account(stay_value,number,signup_date,name,goingout_sun,goingout_sat,extension_11_class,extension_12_class
                             ,extension_11_seat,extension_12_seat));

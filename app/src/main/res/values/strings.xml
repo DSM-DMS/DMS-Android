@@ -87,8 +87,10 @@
     <string name="apply_internal_server_error">서버 오류로 인해 신청에 실패했습니다.</string>
 
     <!-- Extension Apply Fragment -->
-    <string name="extension_11">11시</string>
-    <string name="extension_12">12시</string>
+    <string name="unapplied_11">미신청 </string>
+    <string name="unapplied_12">미신청</string>
+    <string name="extension_11">11시 </string>
+    <string name="extension_12">12시 </string>
     <string name="extension_my_seat">내 위치</string>
     <string name="extension_load_failure">자리를 불러오지 못했습니다.</string>
     <string name="extension_load_internal_server_error">오류로 인해 자리를 불러오지 못했습니다.</string>
