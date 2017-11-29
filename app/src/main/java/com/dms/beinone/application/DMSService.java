@@ -93,7 +93,7 @@ public interface DMSService {
     Call<Void> applyExtension_12(@Header("Authorization") String authorization, @Field("class") int clazz, @Field("seat") int seat);
 
     @GET("/extension/12")
-    Call<ApplyStatus> applyExtensionStatus_12(@Header("Authorization") String authorization);
+    Call<JsonObject> applyExtensionStatus_12(@Header("Authorization") String authorization);
 
     @GET("/mypage")
     Call<Account> loadMyPage(@Header("Authorization") String authorization);

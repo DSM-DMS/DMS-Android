@@ -30,7 +30,6 @@
             android:paddingLeft="8dp"
             android:paddingStart="8dp"
             android:text="@string/stay_friday_go"
-            android:textStyle="bold"
             android:tag="1"
             android:textSize="28sp" />
         
@@ -47,7 +46,6 @@
             android:paddingLeft="8dp"
             android:paddingStart="8dp"
             android:text="@string/stay_saturday_go"
-            android:textStyle="bold"
             android:textSize="28sp" />
 
         <Space
@@ -64,7 +62,6 @@
             android:paddingStart="8dp"
             android:text="@string/stay_saturday_come"
             android:textSize="28sp"
-            android:textStyle="bold"
             />
 
         <Space
@@ -80,7 +77,6 @@
             android:paddingLeft="8dp"
             android:paddingStart="8dp"
             android:text="@string/stay_stay"
-            android:textStyle="bold"
             android:textSize="28sp" />
     </RadioGroup>
 

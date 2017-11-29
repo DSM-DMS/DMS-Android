@@ -72,8 +72,8 @@ public class MyPageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_page, container, false);
 
-        mStayStatusTV = (TextView) view.findViewById(R.id.tv_my_page_stay_status);
-        mExtensionStatusTV = (TextView) view.findViewById(R.id.tv_my_page_extension_status);
+        mStayStatusTV = (TextView) view.findViewById(R.id.my_page_stay_tv);
+        mExtensionStatusTV = (TextView) view.findViewById(R.id.my_page_extension_11_tv);
         mMeritTV = (TextView) view.findViewById(R.id.tv_my_page_merit);
         mDemeritTV = (TextView) view.findViewById(R.id.tv_my_page_demerit);
         mLogoutMenu = view.findViewById(R.id.layout_my_page_logout);
@@ -321,7 +321,6 @@ public class MyPageFragment extends Fragment {
                             String signup_date=element.getAsJsonObject().get("signup_date").getAsString();
                             int stay_value=element.getAsJsonObject().get("stay_value").getAsInt();
 
-                            Toast.makeText(getActivity(),name,Toast.LENGTH_SHORT).show();
 
                             bind(new Account(stay_value,number,signup_date,name,goingout_sun,goingout_sat,extension_11_class,extension_12_class
                             ,extension_11_seat,extension_12_seat));
