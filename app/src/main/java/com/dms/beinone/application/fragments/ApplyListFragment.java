@@ -172,25 +172,26 @@ public class ApplyListFragment extends Fragment {
         StringBuffer extensionStatusText = new StringBuffer();
         extensionStatusText.append("11시 "); // 11시
         extensionStatusText.append("미신청"); // 11시 미신청
-        extensionStatusText.append("\n"); // 11시 미신청 \n
-        extensionStatusText.append("12시 "); // 11시 미신청 \n 12시
-        extensionStatusText.append("미신청");// 11시 미신청 \n12시 미신청
+        extensionStatusText.append("\n"); // 11시 미신청\n
+        extensionStatusText.append("12시 "); // 11시 미신청\n12시
+        extensionStatusText.append("미신청");// 11시 미신청\n12시 미신청
 
         if(applyStatus_11 == 0 && applyStatus_12 == 0) {// applyStatus_11 == 0 , applyStatus_12 == 0
 
             statusExtensionTV.setText(extensionStatusText.toString());
         } else if(applyStatus_11 == 1) {// applyStatus_11 > 0 , applyStatus_12 == 0
 
-            extensionStatusText.replace(5,7, ExtensionUtils.getStringFromClass(applyStatus_11));
+            // 4~6 -> "미신청", 12~14 -> "미신청"
+            extensionStatusText.replace(4,6, ExtensionUtils.getStringFromClass(applyStatus_11));
             statusExtensionTV.setText(extensionStatusText.toString());
         } else if(applyStatus_12 == 1) {// applyStatus_11 == 0 , applyStatus_12 > 0
 
-            extensionStatusText.replace(14,16, ExtensionUtils.getStringFromClass(applyStatus_12));
+            extensionStatusText.replace(12,14, ExtensionUtils.getStringFromClass(applyStatus_12));
             statusExtensionTV.setText(extensionStatusText.toString());
         } else { // applyStatus_11 > 0 , applyStatus_12 > 0
 
-            extensionStatusText.replace(5,7, ExtensionUtils.getStringFromClass(applyStatus_11));
-            extensionStatusText.replace(14,16, ExtensionUtils.getStringFromClass(applyStatus_12));
+            extensionStatusText.replace(4,6, ExtensionUtils.getStringFromClass(applyStatus_11));
+            extensionStatusText.replace(12,14, ExtensionUtils.getStringFromClass(applyStatus_12));
             statusExtensionTV.setText(extensionStatusText.toString());
         }
     }
@@ -303,9 +304,8 @@ public class ApplyListFragment extends Fragment {
 
     private void loadApplyExtension() throws IOException{
 
-
         DMSService dmsService = HttpManager.createDMSService_STUDENT(getContext());
-        Call<JsonObject> call=dmsService.applyExtensionStatus_11(AccountManager.isToken(getActivity()));
+        Call<JsonObject> call = dmsService.applyExtensionStatus_11(AccountManager.isToken(getActivity()));
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {

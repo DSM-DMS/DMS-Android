@@ -7,14 +7,11 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,19 +23,12 @@ import com.dms.beinone.application.dialogs.LogoutDialogFragment;
 import com.dms.beinone.application.managers.AccountManager;
 import com.dms.beinone.application.managers.HttpManager;
 import com.dms.beinone.application.models.Account;
-import com.dms.beinone.application.models.ApplyStatus;
 import com.dms.beinone.application.models.Class;
-import com.dms.beinone.application.models.Goingout;
-import com.dms.beinone.application.models.Meal;
-import com.dms.beinone.application.models.Token;
 import com.dms.beinone.application.utils.ExtensionUtils;
 import com.dms.beinone.application.utils.StayUtils;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
-import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -58,7 +48,8 @@ public class MyPageFragment extends Fragment {
     public static final int REQUEST_CODE_LOGOUT_DIALOG = 1;
 
     private TextView mStayStatusTV;
-    private TextView mExtensionStatusTV;
+    private TextView mExtensionStatusTV_11;
+    private TextView mExtensionStatusTV_12;
     private TextView mMeritTV;
     private TextView mDemeritTV;
     private View mLogoutMenu;
@@ -73,7 +64,8 @@ public class MyPageFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_page, container, false);
 
         mStayStatusTV = (TextView) view.findViewById(R.id.my_page_stay_tv);
-        mExtensionStatusTV = (TextView) view.findViewById(R.id.my_page_extension_11_tv);
+        mExtensionStatusTV_11 = (TextView) view.findViewById(R.id.text_mypage_extension_11);
+        mExtensionStatusTV_12 = (TextView) view.findViewById(R.id.text_mypage_extension_12);
         mMeritTV = (TextView) view.findViewById(R.id.tv_my_page_merit);
         mDemeritTV = (TextView) view.findViewById(R.id.tv_my_page_demerit);
         mLogoutMenu = view.findViewById(R.id.layout_my_page_logout);
@@ -164,9 +156,8 @@ public class MyPageFragment extends Fragment {
 
         mStayStatusTV.setText(StayUtils.getStringFromStayStatus(account.getStayValue()));
         String extensionStatus = ExtensionUtils.getStringFromClass(account.getExtension_11_class());
-        mExtensionStatusTV.setText(extensionStatus);
-/*        mMeritTV.setText(account.getMerit());
-        mDemeritTV.setText(account.getDemerit());*/
+        mExtensionStatusTV_11.setText(extensionStatus);
+
     }
 
 
@@ -211,12 +202,12 @@ public class MyPageFragment extends Fragment {
 
 
     private void setExtensionApplyStatus(Class clazz) {
-        mExtensionStatusTV.setText("미신청");
+        mExtensionStatusTV_11.setText("미신청");
 
         if (clazz == null) {
-            mExtensionStatusTV.setText(R.string.unapplied);
+            mExtensionStatusTV_11.setText(R.string.unapplied);
         } else {
-            mExtensionStatusTV.setText(ExtensionUtils.getStringFromClass(clazz.getNo()));
+            mExtensionStatusTV_11.setText(ExtensionUtils.getStringFromClass(clazz.getNo()));
         }
     }
 

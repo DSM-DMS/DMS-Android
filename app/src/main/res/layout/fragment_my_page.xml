@@ -55,66 +55,26 @@
                         />
                 </RelativeLayout>
 
-                <LinearLayout
-                    android:id="@+id/my_page_linear_linear"
+                <TextView
+                    android:id="@+id/text_mypage_extension_11"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@string/my_page_extension_11"
                     android:layout_marginLeft="50dp"
                     android:layout_toLeftOf="@id/my_page_text_blank"
-                    android:orientation="vertical"
                     android:layout_below="@id/my_page_image_relative"
-                    >
+                    />
 
-
-                    <LinearLayout
-                        android:id="@+id/my_page_extension_linear_11"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center"
-                        >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/my_page_extension_11"
-                            />
-
-                        <TextView
-                            android:id="@+id/my_page_extension_11_tv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:text="가온실 - 19"
-                            />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/my_page_extension_linear_12"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center"
-                        android:layout_marginTop="4dp"
-                        android:layout_below="@id/my_page_extension_linear_11"
-                        android:layout_alignLeft="@id/my_page_extension_linear_11"
-                        >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/my_page_extension_12"
-                            />
-
-                        <TextView
-                            android:id="@+id/my_page_extension_12_tv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:text="가온실 - 19"
-                            />
-                    </LinearLayout>
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/text_mypage_extension_12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/my_page_extension_12"
+                    android:layout_marginTop="4dp"
+                    android:layout_below="@id/text_mypage_extension_11"
+                    android:layout_alignLeft="@id/text_mypage_extension_11"
+                    android:layout_toLeftOf="@id/my_page_text_blank"
+                    />
 
                 <TextView
                     android:id="@+id/my_page_text_blank"
@@ -124,28 +84,17 @@
                     android:layout_below="@id/my_page_image_relative"
                     />
 
-                <LinearLayout
-                    android:id="@+id/my_page_stay_linear"
+                <TextView
+                    android:id="@+id/my_page_stay_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:text="금요귀가"
+                    android:paddingRight="10dp"
+                    android:layout_below="@id/my_page_image_relative"
                     android:layout_toRightOf="@id/my_page_text_blank"
                     android:layout_marginRight="50dp"
                     android:gravity="center"
-                    android:layout_marginTop="4dp"
-                    android:layout_below="@id/my_page_image_relative"
-                    >
-
-                    <TextView
-                        android:id="@+id/my_page_stay_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="금요귀가"
-                        android:paddingRight="10dp"
-                        />
-                    <!--글자가 한 단어라 임의로 더 밀어 줌-->
-                </LinearLayout>
-
+                    />
             </RelativeLayout>
 
 
@@ -359,6 +308,4 @@
               android:layout_height="wrap_content"
               android:text="로그인" />-->
     </LinearLayout>
-
-
 </LinearLayout>
