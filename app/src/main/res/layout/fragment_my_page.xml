@@ -88,7 +88,7 @@
                     android:id="@+id/my_page_stay_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="금요귀가"
+                    android:text=""
                     android:paddingRight="10dp"
                     android:layout_below="@id/my_page_image_relative"
                     android:layout_toRightOf="@id/my_page_text_blank"

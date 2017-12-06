@@ -23,7 +23,6 @@ import com.dms.beinone.application.dialogs.LogoutDialogFragment;
 import com.dms.beinone.application.managers.AccountManager;
 import com.dms.beinone.application.managers.HttpManager;
 import com.dms.beinone.application.models.Account;
-import com.dms.beinone.application.models.Class;
 import com.dms.beinone.application.utils.ExtensionUtils;
 import com.dms.beinone.application.utils.StayUtils;
 import com.google.gson.JsonElement;
@@ -55,7 +54,9 @@ public class MyPageFragment extends Fragment {
     private View mLogoutMenu;
     private TextView mLogoutTV;
     private View mChangePassword;
-
+    private int mExtension11;
+    private int mExtension12;
+    private int mStay;
 
 
     @Nullable
@@ -76,7 +77,8 @@ public class MyPageFragment extends Fragment {
         mDemeritTV.setText("0");
 
         loadMyPage_json();
-
+        loadExtensionStatus(); // 연장신청 통신
+        loadStay(); // 잔류신청 통신
 
      /*   try {
             loadApplyStatus();
@@ -160,55 +162,10 @@ public class MyPageFragment extends Fragment {
 
     }
 
+    private void setExtensionApplyStatus(int extension11, int extension12) {
 
-
-
- /*   private void loadApplyStatus() throws IOException {
-        DMSService dmsService = HttpManager.createDMSService(getContext());
-        Call<ApplyStatus> call = dmsService.loadApplyStatus();
-        call.enqueue(new Callback<ApplyStatus>() {
-            @Override
-            public void onResponse(Call<ApplyStatus> call, Response<ApplyStatus> response) {
-
-                Log.d("MYPAGE",response.body().toString());
-                switch (response.code()) {
-                    case HTTP_OK:
-                        ApplyStatus applyStatus = response.body();
-                        if (applyStatus.isExtensionApplied()) {
-                            int no = applyStatus.getExtensionClass();
-                            String name = applyStatus.getExtensionName();
-                            setExtensionApplyStatus(new Class(no, name));
-                        }
-
-                        if (applyStatus.isStayApplied()) {
-                            setStayApplyStatus(applyStatus.getStayValue());
-                        }
-                        break;
-                    case HTTP_BAD_REQUEST:
-                        Toast.makeText(getContext(), R.string.http_bad_request, Toast.LENGTH_SHORT).show();
-                        break;
-                    case HTTP_INTERNAL_SERVER_ERROR:
-                        Toast.makeText(getContext(), R.string.apply_list_load_internal_server_error, Toast.LENGTH_SHORT).show();
-                        break;
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ApplyStatus> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
-    }*/
-
-
-    private void setExtensionApplyStatus(Class clazz) {
-        mExtensionStatusTV_11.setText("미신청");
-
-        if (clazz == null) {
-            mExtensionStatusTV_11.setText(R.string.unapplied);
-        } else {
-            mExtensionStatusTV_11.setText(ExtensionUtils.getStringFromClass(clazz.getNo()));
-        }
+        String extensionString11 = ExtensionUtils.getStringFromClass(extension11);
+        String extensionString12 = ExtensionUtils.getStringFromClass(extension12);
     }
 
     private void setStayApplyStatus(int value) {
@@ -217,6 +174,11 @@ public class MyPageFragment extends Fragment {
         } else {
             mStayStatusTV.setText(StayUtils.getStringFromStayStatus(value));
         }
+    }
+
+    private void setStay (int stay) {
+
+        Log.d("seyStay", "stay : "+Integer.toString(stay));
     }
 
     private void setLogoutMenu() {
@@ -240,6 +202,87 @@ public class MyPageFragment extends Fragment {
                 }
             });
         }
+    }
+
+    private void loadExtensionStatus () {
+
+        DMSService dmsService = new HttpManager().createDMSService_STUDENT(getContext());
+        Call<JsonObject> call_11 = dmsService.applyExtensionStatus_11(AccountManager.isToken(getActivity()));
+        call_11.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                switch (response.code()) {
+
+                    case HTTP_OK :
+                        mExtension11 = response.body().getAsInt();
+                        break;
+                    case HTTP_INTERNAL_SERVER_ERROR :
+                        Log.d("apply_12", "서버에 오류가 발생하였습니다.");
+                        mExtension11 = -1; // 혹시 모르는 서버의 오류로 인해 이상한 값이 넘어가지 않게 초기화함
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+
+        Call<JsonObject> call_12 = dmsService.applyExtensionStatus_12(AccountManager.isToken(getContext()));
+        call_12.enqueue(new Callback<JsonObject> (){
+
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                switch(response.code()) {
+
+                    case HTTP_OK :
+                        mExtension12 = response.body().getAsInt();
+                        break;
+                    case HTTP_INTERNAL_SERVER_ERROR :
+                        Log.d("apply_12", "서버에 오류가 발생하였습니다.");
+                        mExtension12 = -1; // 혹시 모르는 서버의 오류로 인해 이상한 값이 넘어가지 않게 초기화함
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+
+        setExtensionApplyStatus(mExtension11, mExtension12);
+    }
+
+    private void loadStay () {
+
+        DMSService dmsService = HttpManager.createDMSService_STUDENT(getContext());
+        Call<JsonObject> call = dmsService.applyStayStatus(AccountManager.isToken(getActivity()));
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                switch(response.code()) {
+
+                    case HTTP_OK :
+                        mStay = response.body().getAsInt();
+                        break;
+                    case HTTP_INTERNAL_SERVER_ERROR :
+                        Log.d("stay", "서버에 오류가 발생하였습니다.");
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+
+        setStay(mStay);
     }
 
     private void loadMyPage() {
